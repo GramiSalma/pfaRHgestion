@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr" >
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Congés et Absences</title>
+    <!-- Inclusion des dépendances de FullCalendar via CDN -->
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Utilisation de flexbox pour organiser les éléments */
+        }
+        #calendarContainer {
+            flex: 1; /* Le calendrier prendra tout l'espace disponible à gauche */
+            padding: 20px;
+        }
+        #formContainer {
+            flex: 1; /* Les formulaires prendront tout l'espace disponible à droite */
+            padding: 20px;
+        }
+        .header {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .form {
+            display: none;
+            margin-bottom: 20px;
+        }
+        .form.active {
+            display: block;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="time"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .half {
+            width: 50%;
+            float: left;
+        }
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<div id="formContainer">
+    <div class="header">
+        <button class="button" onclick="toggleForm('conge')">Ajouter un Congé</button>
+        <button class="button" onclick="toggleForm('absence')">Ajouter une Absence</button>
+    </div>
+    <div class="form" id="congeForm">
+        <form>
+            <label for="idEmploye">ID Employé:</label>
+            <input type="text" id="idEmploye" name="idEmploye">
+            <div class="half">
+                <label for="dateDebut">Date début:</label>
+                <input type="date" id="dateDebut" name="dateDebut">
+            </div>
+            <div class="half">
+                <label for="dateFin">Date fin:</label>
+                <input type="date" id="dateFin" name="dateFin">
+            </div>
+            <div class="clear"></div>
+            <button class="button">Valider Congé</button>
+        </form>
+    </div>
+    <div class="form" id="absenceForm">
+        <form>
+            <label for="dateAbsence">Date d'absence:</label>
+            <input type="date" id="dateAbsence" name="dateAbsence">
+            <div class="half">
+                <label for="heureDebut">Heure début:</label>
+                <input type="time" id="heureDebut" name="heureDebut">
+            </div>
+            <div class="half">
+                <label for="heureFin">Heure fin:</label>
+                <input type="time" id="heureFin" name="heureFin">
+            </div>
+            <div class="clear"></div>
+            <button class="button">Valider Absence</button>
+        </form>
+    </div>
+</div>
+<script>
+    function toggleForm(formType) {
+        var congeForm = document.getElementById('congeForm');
+        var absenceForm = document.getElementById('absenceForm');
+        if (formType === 'conge') {
+            congeForm.classList.add('active');
+            absenceForm.classList.remove('active');
+        } else {
+            congeForm.classList.remove('active');
+            absenceForm.classList.add('active');
+        }
+    }
+
+</script>
+</body>
+</html>
+
