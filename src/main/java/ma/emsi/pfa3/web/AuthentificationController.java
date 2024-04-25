@@ -21,6 +21,7 @@ public class AuthentificationController {
     public ResponseEntity<?> login(@RequestBody Employe user)
     {
         Employe existingUser = iEmployeService.findByEmail(user.getEmail());
+
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword()))
         {   System.out.println("ok");
             return ResponseEntity.ok(existingUser);

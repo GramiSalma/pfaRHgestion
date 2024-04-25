@@ -85,7 +85,7 @@ public class Pfa3Application {
 			absence.setEmploye(employeService.findEmployeById(4));
 			absence.setDateAbsence(LocalDate.of(2024, 5,26)); // Date de l'absence
 			absence.setHeureDebutAbsence(LocalTime.of(9, 0)); // Heure de début de l'absence
-			absence.setStatutAbsence(StatusCNG.Approved);
+
 			absence.setHeureFinAbsence(LocalTime.of(14, 0)); // Heure de fin de l'absence
 			absenceService.addAbsence(4,absence);
 			employeService.findEmployeById(4).afficherSoldeEmploye();

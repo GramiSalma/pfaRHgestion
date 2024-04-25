@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Collection;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Entity
 @Data
 @NoArgsConstructor
@@ -18,6 +18,7 @@ public class Employe{
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int idEmploye;
     private float solde;
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private String password;
     @OneToMany(mappedBy = "employe")
     @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
@@ -39,6 +40,7 @@ public class Employe{
     private String sexe;
     private  String situationFamiliale;
     private  long telephone;
+
     public void afficherSoldeEmploye() {
 
         // Calculer le solde restant en jours et heures significatives
