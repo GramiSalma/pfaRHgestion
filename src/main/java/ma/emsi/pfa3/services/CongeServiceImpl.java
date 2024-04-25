@@ -42,7 +42,12 @@ public class CongeServiceImpl implements ICongeService{
             return soldeJours;
         }
     @Override
-    public Conge addConge(Conge conge) {
+    public Conge addConge(int idEmploye, Conge conge) {
+
+        // Charger l'employé à partir de la base de données en utilisant son ID
+        Employe demandeurConge = employeRepository.findById(idEmploye)
+                .orElseThrow(() -> new IllegalArgumentException("Employé non trouvé"));
+        conge.setEmploye(demandeurConge);
         if (conge.getDateDebutConge().isAfter(conge.getDateFinConge())) {
             // Gérer l'erreur ici (par exemple, lancer une exception)
 
@@ -64,7 +69,6 @@ public class CongeServiceImpl implements ICongeService{
             throw new IllegalArgumentException("La durée du congé n'est pas valide.");
         }
 
-        Employe demandeurConge =conge.getEmploye();
         ajusterSoldeConge(demandeurConge,conge);
         conge.setDateDemandeConge(LocalDate.now());
         conge.DureeConge();

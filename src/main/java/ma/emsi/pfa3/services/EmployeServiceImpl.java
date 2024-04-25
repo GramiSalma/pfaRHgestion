@@ -12,6 +12,7 @@ public class EmployeServiceImpl implements IEmployeService {
     private EmployeRepository employeRepository;
 
     public EmployeServiceImpl(EmployeRepository employeRepository) {
+
         this.employeRepository = employeRepository;
     }
 
@@ -23,5 +24,10 @@ public class EmployeServiceImpl implements IEmployeService {
     public Employe findEmployeById(int id){
 
         return employeRepository.findByIdEmploye(id);
+    }
+
+    @Override
+    public Employe findByEmail(String email) {
+        return employeRepository.findByEmail(email);
     }
 }

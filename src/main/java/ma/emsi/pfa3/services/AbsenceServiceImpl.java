@@ -31,10 +31,8 @@ public class AbsenceServiceImpl implements IAbsenceService{
 
 
     @Override
-    public Absence addAbsence(Absence absence) {
-        if (absence.getEmploye().getSolde()<absence.DureeAbsence()){
-            throw new IllegalArgumentException("Solde insuffisant pour absence");
-        }
+    public Absence addAbsence(int idEmploye,Absence absence) {
+
        if (absence.getDateAbsence().isBefore(LocalDate.now())) {
            throw new IllegalArgumentException("Date d'absence invalide");
        }
@@ -50,7 +48,9 @@ public class AbsenceServiceImpl implements IAbsenceService{
 
         ResponsableRH defaultRh=responsableRHRepository.findByNom("Default");
         absence.setRh(defaultRh);
-
+        Employe demandeurAbsence = employeRepository.findById(idEmploye)
+                .orElseThrow(() -> new IllegalArgumentException("Employé non trouvé"));
+        absence.setEmploye(demandeurAbsence);
         absence.setDateDemandeAbsence(LocalDate.now());
         // Enregistrer l'absence dans le repository
         return absenceRepository.save(absence);}

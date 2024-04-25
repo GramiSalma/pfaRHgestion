@@ -8,19 +8,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/conges")
+@RequestMapping("conges")
 @RequiredArgsConstructor
 public class CongeController {
     private final ICongeService iCongeService;
-    @GetMapping
+
+@GetMapping
     public ResponseEntity<List<Conge>> getConges(){
         return new ResponseEntity<>(iCongeService.getConges(), HttpStatus.FOUND);
     }
-    @PostMapping
-    public Conge addConge(@RequestBody Conge conge){
-        return iCongeService.addConge(conge);
+    @GetMapping("/conges")
+    public List<Conge> ListConges(){
+           return iCongeService.getConges();}
+
+    @PostMapping("/{idEmploye}")
+    public ResponseEntity<Conge> addConge(@PathVariable int idEmploye, @RequestBody Conge conge) {
+        Conge newConge = iCongeService.addConge(idEmploye, conge);
+        return new ResponseEntity<>(newConge, HttpStatus.CREATED);
     }
 
 

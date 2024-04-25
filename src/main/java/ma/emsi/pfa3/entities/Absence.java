@@ -31,6 +31,7 @@ public class Absence {
     private long dureeAbsence;
     @ManyToOne
     private Employe employe;
+
     @ManyToOne
     private ResponsableRH rh;
     public long DureeAbsence(){

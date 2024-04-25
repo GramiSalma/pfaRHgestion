@@ -7,5 +7,6 @@ public interface EmployeRepository extends JpaRepository<Employe,Integer> {
 
 
     Employe findByIdEmploye(int id);
+    Employe findByEmail(String email);
 
 }

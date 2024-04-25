@@ -24,7 +24,6 @@ public class  ResponsableRH  {
     @OneToMany(mappedBy = "rh")
     private Collection<Conge> conges;
     @ManyToOne
-
     private Departement departement;
 
 }

@@ -1,6 +1,7 @@
 package ma.emsi.pfa3;
 
 import ma.emsi.pfa3.entities.*;
+import ma.emsi.pfa3.repositories.EmployeRepository;
 import ma.emsi.pfa3.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -46,8 +47,7 @@ public class Pfa3Application {
 			Departement   departementsearch7=departementService.findDepartementById(7);
 
 			System.out.println(departementsearch7.getIdDepartement());
-			Stream.of(
-							departementsearch1,departementsearch2,departementsearch4,departementsearch4,departementsearch5
+			Stream.of(departementsearch1,departementsearch2,departementsearch4,departementsearch4,departementsearch5
 
 					)
 					.forEach(departement->{
@@ -73,21 +73,28 @@ public class Pfa3Application {
 
 			Conge conge1=new Conge();
 			conge1.setEmploye(employeService.findEmployeById(3));
-			conge1.setDateDebutConge(LocalDate.of(2024, 4, 15));
-			conge1.setDateFinConge(LocalDate.of(2024, 4, 17));
+			conge1.setDateDebutConge(LocalDate.of(2024, 5, 23));
+			conge1.setDateFinConge(LocalDate.of(2024, 5, 30
+			));
 			conge1.setTypeConge(TypeConge.Vacances);
 			conge1.setStatutConge(StatusCNG.Approved);
-			congeService.addConge(conge1);
+			congeService.addConge(3,conge1);
 			employeService.findEmployeById(3).afficherSoldeEmploye();
 
 			Absence absence = new Absence();
 			absence.setEmploye(employeService.findEmployeById(4));
-			absence.setDateAbsence(LocalDate.of(2024, 4, 14)); // Date de l'absence
+			absence.setDateAbsence(LocalDate.of(2024, 5,26)); // Date de l'absence
 			absence.setHeureDebutAbsence(LocalTime.of(9, 0)); // Heure de début de l'absence
 			absence.setStatutAbsence(StatusCNG.Approved);
 			absence.setHeureFinAbsence(LocalTime.of(14, 0)); // Heure de fin de l'absence
-			absenceService.addAbsence(absence);
+			absenceService.addAbsence(4,absence);
 			employeService.findEmployeById(4).afficherSoldeEmploye();
+
+
+		Employe	employe=employeService.findEmployeById(4);
+		employe.setEmail("sara@gmail.com");
+		employe.setPassword("1234");
+		employeService.saveEmploye(employe);
 
 		};
 	}

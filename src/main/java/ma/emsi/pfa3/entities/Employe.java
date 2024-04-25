@@ -1,5 +1,6 @@
 package ma.emsi.pfa3.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,11 +18,12 @@ public class Employe{
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int idEmploye;
     private float solde;
+    private String password;
     @OneToMany(mappedBy = "employe")
-
+    @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
     private Collection<Absence> absences;
     @OneToMany(mappedBy = "employe")
-
+    @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
     private Collection<Conge> conges;
     @ManyToOne
     private Departement departement;
@@ -38,6 +40,7 @@ public class Employe{
     private  String situationFamiliale;
     private  long telephone;
     public void afficherSoldeEmploye() {
+
         // Calculer le solde restant en jours et heures significatives
         int jours = (int) this.solde;
         int heures = (int) ((this.solde - jours) * 8);

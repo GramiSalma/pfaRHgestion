@@ -1,5 +1,6 @@
 package ma.emsi.pfa3.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Conge {
     @ManyToOne
 
     private Employe employe;
+    @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private ResponsableRH rh;
 
